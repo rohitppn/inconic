@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logo{
+  margin-left: 0;
+}
+
+.logo img {
+  height: 100vh; /* Adjust height as per your logo size */
+}
+
+.tgmenu__navbar-wrap {
+  display: flex; /* Ensure flexbox is applied */
+  justify-content: flex-start; /* Keep items aligned to the start initially */
+  align-items: center; /* Align items vertically */
+}
+
+.navigation {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Space between nav items */
+  margin-left: auto; /* This pushes the nav items to the right */
+}
+
+.navigation li {
+  display: inline-block;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: black; /* Adjust text color */
+  padding: 10px;
+  font-size: 18px;
+}
+
+.navigation a:hover {
+  background-color: #f0f0f0; /* Add hover effect */
+  border-radius: 5px;
+}
