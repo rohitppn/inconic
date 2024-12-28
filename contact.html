@@ -234,16 +234,16 @@ button:hover {
       <div class="contact-info">
         <h1>Get in touch</h1>
         <p>
-          Proin volutpat consequat porttitor cras nullam gravida at. Orci molestie a eu arcu. Sed ut tincidunt integer elementum id sem. Arcu sed malesuada et magna.
+            At Iconic Insights, we are committed to providing innovative marketing research solutions tailored to meet your business needs. Whether you're looking to gain a deeper understanding of your market, enhance customer satisfaction, or drive growth, our team is here to help.
         </p>
         <div class="contact-details">
-          <p><strong>Address:</strong> East of kailash, South Delhi, New Delhi</p>
+          <p><strong>Address:</strong> East of kailash, South Delhi, New Delhi India</p>
           <p><strong>Phone:</strong> +91 7209062238</p>
           <p><strong>Email:</strong> sales@iconicinsights.co.in</p>
         </div>
       </div>
       <div class="contact-form">
-        <form action="#" method="post">
+        <form action="#" method="post" name="google-sheet">
           <div class="form-group">
             <label for="firstName">First name</label>
             <input type="text" id="firstName" name="firstName" required>
@@ -262,16 +262,55 @@ button:hover {
           </div>
           <div class="form-group">
             <label for="text">Company Name</label>
-            <input type="text" id="company" name="Company-Name">
+            <input type="text" id="company" name="company">
           </div>
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="5"></textarea>
           </div>
-          <button type="submit">Send message</button>
+          <button type="submit" value="submit" name="submit">Send message</button>
         </form>
       </div>
     </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzegeHXLvRFoKwCf6CTez28NMKuKndnS1GYQwXQDXdZSgWJicR0DfSpD2KEDiw3_2UdoA/exec';
+        const form = document.forms['google-sheet'];
+    
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+    
+            // Optional: Disable the form to prevent multiple submissions
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            
+            // Optional: Show a loading message or spinner
+            const loadingMessage = document.createElement('p');
+            loadingMessage.textContent = 'Submitting your data...';
+            form.appendChild(loadingMessage);
+    
+            // Send form data to the Google Apps Script Web App using Fetch API
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Thanks! Your data has been submitted.");
+                        form.reset();  // Reset the form after success (optional)
+                    } else {
+                        throw new Error('Failed to submit data.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert('There was an error submitting your data. Please try again.');
+                })
+                .finally(() => {
+                    // Optional: Re-enable the submit button and remove loading message
+                    submitButton.disabled = false;
+                    if (loadingMessage) loadingMessage.remove();
+                });
+        });
+    </script>
+    
   </body>
 
 </html>
